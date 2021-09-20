@@ -5,7 +5,7 @@ title: Profiles
 
 
 <ul>
-    {% for profile in collections.profile -%}
-    <li><p><a href="{{ profile.url }}" >{{ profile.data.name }}</a></p></li>
+    {% for profile in profiles.all -%}
+    <li><p><a href="/profiles/{{ profile.name | slug }}/" >{{ profile.name }}</a></p></li>
     {% endfor -%}
 </ul>

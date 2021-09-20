@@ -3,20 +3,21 @@ layout: "base.njk"
 ---
 
 <h2>Dream</h2>
-<strong>{{ dream }}</strong>
+<strong>{{ profile.dream }}</strong>
 
 <h2>Gig tags</h2>
-{%for tag, totalYears in gigTags | dictsort(false, 'value')|reverse -%}
-<p>{{tag}}: <{{totalYears}} years</p>
-{% endfor -%}
+{{ profile.gigTags | log }}
+{# {%for tag, totalYears in gigTags | dictsort(false, 'value') | reverse -%}
+<p>{{ tag }}: {{ totalYears }} years</p>
+{% endfor -%} #}
 
 <h2>Gigs</h2>
 <ol>
-    {% for g in gigs -%}
+    {% for g in profile.gigs -%}
     <li class="gig">
         <h3>{{g.title}}</h3>
         <p>{{g.start}} <em>({{g.duration}}{% if g.duration !== "ONGOING" %} months{% endif %})</em></p>
-        
+
         <h4>Tags</h4>
         <ul>
         {% for t in g.tags -%}
@@ -30,24 +31,24 @@ layout: "base.njk"
         <li><p>{{h}}</p></li>
         {% endfor -%}
         </ul>
-    
+
     </li>
     {% endfor -%}
 </ol>
 
 
-<h2>Teams</h2>
+{# <h2>Teams</h2>
 <ul>
     {% for t in collections.team -%}
     {% if teamIds.includes(t.data.id) %} <li><p><a href="{{ t.url }}" >{{ t.data.name }}</a></p></li> {% endif %}
     {% endfor -%}
-</ul>
+</ul> #}
 
 <div class="profile-footer">
-    <img class="profile-image" src="{{profileImageUrl}}" alt="Profile image"/>
+    <img class="profile-image" src="{{ profile.profileImageUrl | url }}" alt="Profile image"/>
     <div class="profile-contact">
-        <p>{{name}}</p>
-        <p>{{phone}}</p>
-        <p>{{email}}</p>
+        <p>{{ profile.name }}</p>
+        <p>{{ profile.phone }}</p>
+        <p>{{ profile.email }}</p>
     </div>
 </div>
